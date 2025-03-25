@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>LED Them Fight</title>
+    <link rel="stylesheet" href="main.css" />
+    <script src="cash.js"></script>
+</head>
+<body>
+    <div>
+	<h2>LED Them Fight</h2>
+        <div class=controls>
+            <img src="brightness.svg" alt=Brightness title=Brightness />
+            <input type="range" id="brightness" min="1" max="255" step="1" />
+	    <span id=status></span>
+        </div>
+	<div id=pseudo_effects>
+	    <label><input type="radio" name="g1" id="stop" />Off</label>
+	</div>
+	<div id=effects>
+	</div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
