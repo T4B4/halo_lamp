@@ -110,12 +110,12 @@ class MyHandler(SimpleHTTPRequestHandler):
             self.end_headers()
 
 def led_driver_process(to_led_driver, to_web_server):
-    import worker_led
-    worker_led.drive_led_forever(to_led_driver, to_web_server)
+    import worker_led_2
+    worker_led_2.drive_led_forever(to_led_driver, to_web_server)
 
 def sequence_generator_process():
-    import worker_led
-    worker_led.seqgen_forever()
+    import worker_led_2
+    worker_led_2.seqgen_forever()
 
 def main_exit(signal_number, stack_frame):
     # Calling sys.exit() allows the process to terminate the daemon=True
