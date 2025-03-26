@@ -12,7 +12,7 @@ LED_INVERT = False  # True to invert the signal (when using NPN transistor level
 LED_CHANNEL = 0     # Set to '1' for GPIOs 13, 19, 41, 45 or 53
 LED_STRIP = ws.SK6812_STRIP_RGBW  # Strip type for RGBW
 
-fps_goal = 60 # aim at rendering at this fps rate
+fps_goal = 300 # aim at rendering at this fps rate
 proc_name = None
 pkg_name = 'effect_library'
 pkg_path = os.path.dirname(__file__) + '/' + pkg_name
@@ -77,12 +77,12 @@ def cto8b(color, ɣ=2.2):
 
     # If RGBW is provided, handle it correctly
     if len(color) == 4:
-        r, g, b, w = color
+        w, r, g, b = color
     else:
         r, g, b = color
         w = 0  # Default to 0 if W is not specified
 
-    return [gamma(min(255, round(x * brightness)), ɣ) for x in (r, g, b, w)]
+    return [gamma(min(255, round(x * brightness)), ɣ) for x in (w, r, g, b)]
 
 def solid(strip, color):
     for i in range(strip.numPixels()):
