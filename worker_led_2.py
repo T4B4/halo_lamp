@@ -225,7 +225,7 @@ def do_initial_setup(strings, conf):
     log(f'configuring {conf["nr_led_strings"]} led string(s)'
         f' with {conf["num_pixels"]} pixel(s)')
     strings.clear()
-    strings.append(PixelString(conf["num_pixels"], 18, conf["inverted"]))
+    strings.append(PixelString(50, 18, conf["inverted"]))#conf["num_pixels"]
 
 def do_effect(strings, effect):
     try:
