@@ -1,13 +1,16 @@
 import time, random, struct, array, math, sys, os, traceback, signal, importlib, importlib.util, colorsys, gpiozero
 from rpi_ws281x import Color, PixelStrip
-# import rpi_ws281x as ws
+import rpi_ws281x as ws
 
+# LED strip configuration:
+LED_COUNT = 50      # Number of LED pixels
+LED_PIN = 18        # GPIO pin connected to the pixels (18 uses PWM!)
 LED_FREQ_HZ = 800000  # LED signal frequency in hertz (usually 800khz)
-LED_DMA = 10          # DMA channel to use for generating signal
-LED_INVERT = False    # True to invert the output signal (useful when using
-                      #   NPN transistor level shift)
+LED_DMA = 10        # DMA channel to use for generating signal
 LED_BRIGHTNESS = 255  # Set to 0 for darkest and 255 for brightest
-LED_CHANNEL = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
+LED_INVERT = False  # True to invert the signal (when using NPN transistor level shift)
+LED_CHANNEL = 0     # Set to '1' for GPIOs 13, 19, 41, 45 or 53
+LED_STRIP = ws.SK6812_STRIP_RGBW  # Strip type for RGBW
 
 fps_goal = 60 # aim at rendering at this fps rate
 proc_name = None
@@ -60,10 +63,6 @@ def gamma(x, ɣ):
     return _gamma[ɣ][x]
 
 def cto8b(color, ɣ=2.2):
-    # If RGBW is provided, handle it correctly
-    if len(color) == 4:
-        r, g, b, w = color
-    
     if isinstance(color, str):
         # Convert hex color to tuple
         assert color.startswith('#')
@@ -76,10 +75,12 @@ def cto8b(color, ɣ=2.2):
             raise ValueError(f'Invalid color format: #{color}')
         color = tuple(color)
 
+    # If RGBW is provided, handle it correctly
+    if len(color) == 4:
+        r, g, b, w = color
     else:
-        print(color)
-        # r, g, b = color
-        # w = 0  # Default to 0 if W is not specified
+        r, g, b = color
+        w = 0  # Default to 0 if W is not specified
 
     return [gamma(min(255, round(x * brightness)), ɣ) for x in (r, g, b, w)]
 
@@ -156,7 +157,7 @@ class PixelString:
         self.num_pixels = num_pixels
         # led_pin is GPIO pin to led string (18 uses PWM, 10 uses SPI, etc)
         self.led_pin = led_pin
-        self.ps = PixelStrip(num_pixels, led_pin, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL) #ws.WS2812_STRIP_RGBW
+        self.ps = PixelStrip(num_pixels, led_pin, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP) #ws.WS2812_STRIP_RGBW
         self.ps.begin()
         self.relay = gpiozero.LED(15)
         self.effect = None
@@ -328,7 +329,7 @@ def write_bin(fname, num_pixels, n_sec, frames):
 def regenerate(mod_name):
     try:
         log(f'regenerating sequence for {mod_name}')
-        num_pixels = 60
+        num_pixels = 50
         n_sec = 10
         frame_count = 60 * n_sec
         m = fx_load(num_pixels, mod_name)

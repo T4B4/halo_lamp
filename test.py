@@ -13,8 +13,6 @@ LED_INVERT = False  # True to invert the signal (when using NPN transistor level
 LED_CHANNEL = 0     # Set to '1' for GPIOs 13, 19, 41, 45 or 53
 LED_STRIP = ws.SK6812_STRIP_RGBW  # Strip type for RGBW
 
-
-
 def setPixelColor(strip, i, color):
     """Set color of individual pixel."""
     strip.setPixelColor(i, color)
