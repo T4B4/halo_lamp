@@ -21,7 +21,7 @@ class MyHandler(SimpleHTTPRequestHandler):
     # is not threaded and only accepts 1 blocking client at a time
     # (note: the timeout is implemented by StreamRequestHandler, parent
     # of BaseHTTPRequestHandler, parent of SimpleHTTPRequestHandler)
-    timeout = 5
+    timeout = 1
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory='www', **kwargs)
