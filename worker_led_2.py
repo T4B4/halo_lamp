@@ -1,6 +1,6 @@
 import time, random, struct, array, math, sys, os, traceback, signal, importlib, importlib.util, colorsys, gpiozero
 from rpi_ws281x import Color, PixelStrip
-import rpi_ws281x as ws
+# import rpi_ws281x as ws
 
 LED_FREQ_HZ = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA = 10          # DMA channel to use for generating signal
@@ -156,7 +156,7 @@ class PixelString:
         self.num_pixels = num_pixels
         # led_pin is GPIO pin to led string (18 uses PWM, 10 uses SPI, etc)
         self.led_pin = led_pin
-        self.ps = PixelStrip(num_pixels, led_pin, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, ws.WS2811_STRIP_RGBW)
+        self.ps = PixelStrip(num_pixels, led_pin, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL) #ws.WS2812_STRIP_RGBW
         self.ps.begin()
         self.relay = gpiozero.LED(15)
         self.effect = None
@@ -191,7 +191,8 @@ def render_one_frame(strings):
             # do not pass a 2nd arg to cto8b() so as to perform gamma-correction
             # as we are rendering on a physical LED string
             color_values = cto8b(st.fx_mod.render(i, st.frame))
-            st.ps.setPixelColor(phys_i, Color_GRBW(*cto8b(st.fx_mod.render(i, st.frame))))  # Assumes Color() supports RGBW
+            st.ps.setPixelColor(phys_i, Color_GRBW(*cto8b(st.fx_mod.render(i, st.frame))))  
+            print(Color_GRBW(*cto8b(st.fx_mod.render(i, st.frame)))) # Assumes Color() supports RGBW
         st.ps.show()
         st.frame += 1
 
