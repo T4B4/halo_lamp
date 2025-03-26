@@ -12,7 +12,7 @@ LED_INVERT = False  # True to invert the signal (when using NPN transistor level
 LED_CHANNEL = 0     # Set to '1' for GPIOs 13, 19, 41, 45 or 53
 LED_STRIP = ws.SK6812_STRIP_RGBW  # Strip type for RGBW
 
-fps_goal = 1 # aim at rendering at this fps rate
+fps_goal = 10 # aim at rendering at this fps rate
 proc_name = None
 pkg_name = 'effect_library'
 pkg_path = os.path.dirname(__file__) + '/' + pkg_name
@@ -23,22 +23,22 @@ strings = []
 ftimes = []
 _gamma = {}
 colors = {
-        # 'black': (0, 0, 0),
-        # 'red': (1, 0, 0),
-        # 'lime': (0, 1, 0),
-        # 'yellow': (1, 1, 0),
-        # 'blue': (0, 0, 1),
-        # 'magenta': (1, 0, 1),
-        # 'cyan': (0, 1, 1),
-        # 'white': (1, 1, 1),
-        # 'green': (0, .5, 0),
-        # 'pink': (1, .75, .8),
-        # 'silver': (.75, .75, .75),
-        # 'gray': (.5, .5, .5),
-        # 'grey': (.5, .5, .5),
-        # 'purple': (.5, 0, .5),
-        # 'orange': (1, .65, 0),
-        # 'orange_halloween': (.90, .40, 0),
+        'black': (0, 0, 0),
+        'red': (1, 0, 0),
+        'lime': (0, 1, 0),
+        'yellow': (1, 1, 0),
+        'blue': (0, 0, 1),
+        'magenta': (1, 0, 1),
+        'cyan': (0, 1, 1),
+        'white': (1, 1, 1),
+        'green': (0, .5, 0),
+        'pink': (1, .75, .8),
+        'silver': (.75, .75, .75),
+        'gray': (.5, .5, .5),
+        'grey': (.5, .5, .5),
+        'purple': (.5, 0, .5),
+        'orange': (1, .65, 0),
+        'orange_halloween': (.90, .40, 0),
         'grbw1': (1, 0, 0, 0),
         'grbw2': (0, 1, 0, 0),
         'grbw3': (0, 0, 1, 0),
