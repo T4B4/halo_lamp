@@ -59,6 +59,10 @@ def gamma(x, ɣ):
     return _gamma[ɣ][x]
 
 def cto8b(color, ɣ=2.2):
+    # If RGBW is provided, handle it correctly
+    if len(color) == 4:
+        r, g, b, w = color
+    
     if isinstance(color, str):
         # Convert hex color to tuple
         assert color.startswith('#')
@@ -71,9 +75,6 @@ def cto8b(color, ɣ=2.2):
             raise ValueError(f'Invalid color format: #{color}')
         color = tuple(color)
 
-    # If RGBW is provided, handle it correctly
-    if len(color) == 4:
-        r, g, b, w = color
     else:
         r, g, b = color
         w = 0  # Default to 0 if W is not specified
@@ -87,8 +88,8 @@ def solid(strip, color):
 #
 # Effects
 #
-def grbw(g, r, b, w):
-    return (g, r, b, w)
+def rgbw(r, g, b, w=0):
+    return (r, g, b, w)
 
 def rgb(r, g, b):
     return (r, g, b)
@@ -109,6 +110,7 @@ def enrich_namespace(num_pixels, mod):
     mod.hsv = hsv
     mod.dim = dim
     mod.mul = mul
+    mod.rgbw = rgbw
     for (k, v) in colors.items():
         setattr(mod, k, v)
 
