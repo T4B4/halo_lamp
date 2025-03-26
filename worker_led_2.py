@@ -62,7 +62,7 @@ def gamma(x, ɣ):
                 [round(255 * (x / 255) ** ɣ) for x in range(256)])
     return _gamma[ɣ][x]
 
-def cto8b(color, ɣ=2.2):
+def cto8b(color, ɣ=3):
     if isinstance(color, str):
         # Convert hex color to tuple
         assert color.startswith('#')
