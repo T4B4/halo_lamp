@@ -320,8 +320,8 @@ def write_bin(fname, num_pixels, n_sec, frames):
     buf = b''
     for fr in frames:
         for i in fr:
-            r, g, b = i
-            buf += struct.pack('BBB', r, g, b)
+            r, g, b, w = i
+            buf += struct.pack('BBB', r, g, b, w)
     open(fname, 'wb').write(buf)
 
 def regenerate(mod_name):
