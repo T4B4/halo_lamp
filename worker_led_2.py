@@ -191,8 +191,7 @@ def render_one_frame(strings):
             # do not pass a 2nd arg to cto8b() so as to perform gamma-correction
             # as we are rendering on a physical LED string
             color_values = cto8b(st.fx_mod.render(i, st.frame))
-            st.ps.setPixelColor(phys_i, Color_GRBW(*cto8b(st.fx_mod.render(i, st.frame))))  
-            print(Color_GRBW(*cto8b(st.fx_mod.render(i, st.frame)))) # Assumes Color() supports RGBW
+            st.ps.setPixelColor(phys_i, Color_GRBW(*cto8b(st.fx_mod.render(i, st.frame))))   # Assumes Color() supports RGBW
         st.ps.show()
         st.frame += 1
 
@@ -329,7 +328,7 @@ def write_bin(fname, num_pixels, n_sec, frames):
 def regenerate(mod_name):
     try:
         log(f'regenerating sequence for {mod_name}')
-        num_pixels = 100
+        num_pixels = 60
         n_sec = 10
         frame_count = 60 * n_sec
         m = fx_load(num_pixels, mod_name)
