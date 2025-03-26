@@ -76,8 +76,9 @@ def cto8b(color, ɣ=2.2):
         color = tuple(color)
 
     else:
-        r, g, b = color
-        w = 0  # Default to 0 if W is not specified
+        print(color)
+        # r, g, b = color
+        # w = 0  # Default to 0 if W is not specified
 
     return [gamma(min(255, round(x * brightness)), ɣ) for x in (r, g, b, w)]
 
@@ -178,8 +179,6 @@ class PixelString:
         if self.relay:
             self.relay.off()
 
-
-
 def render_one_frame(strings):
     ftimes.insert(0, time.time())
     if len(ftimes) > 30:
@@ -192,7 +191,7 @@ def render_one_frame(strings):
             # do not pass a 2nd arg to cto8b() so as to perform gamma-correction
             # as we are rendering on a physical LED string
             color_values = cto8b(st.fx_mod.render(i, st.frame))
-            st.ps.setPixelColor(phys_i, Color(*color_values))  # Assumes Color() supports RGBW
+            st.ps.setPixelColor(phys_i, Color_GRBW(*cto8b(st.fx_mod.render(i, st.frame))))  # Assumes Color() supports RGBW
         st.ps.show()
         st.frame += 1
 
