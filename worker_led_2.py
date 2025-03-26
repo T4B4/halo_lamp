@@ -41,7 +41,7 @@ colors = {
         'grbw4': (0, 0, 0, 1),
         }
 
-def Color_GRBW(g, r, b, w):
+def Color_GRBW(r, g, b, w):
     return (w << 24) | (r << 16) | (g << 8) | b
 
 
