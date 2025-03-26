@@ -4,7 +4,7 @@ from rpi_ws281x import Color, PixelStrip
 
 LED_FREQ_HZ = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA = 10          # DMA channel to use for generating signal
-LED_INVERT = False    # True to invert the output signal (useful when using
+LED_INVERT = True    # True to invert the output signal (useful when using
                       #   NPN transistor level shift)
 LED_BRIGHTNESS = 255  # Set to 0 for darkest and 255 for brightest
 LED_CHANNEL = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
@@ -329,7 +329,7 @@ def write_bin(fname, num_pixels, n_sec, frames):
 def regenerate(mod_name):
     try:
         log(f'regenerating sequence for {mod_name}')
-        num_pixels = 60
+        num_pixels = 100
         n_sec = 10
         frame_count = 60 * n_sec
         m = fx_load(num_pixels, mod_name)
