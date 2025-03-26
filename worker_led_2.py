@@ -35,7 +35,15 @@ colors = {
         'purple': (.5, 0, .5),
         'orange': (1, .65, 0),
         'orange_halloween': (.90, .40, 0),
+        'grbw1': (1, 0, 0, 0),
+        'grbw2': (0, 1, 0, 0),
+        'grbw3': (0, 0, 1, 0),
+        'grbw4': (0, 0, 0, 1),
         }
+
+def Color_GRBW(g, r, b, w):
+    return (w << 24) | (r << 16) | (g << 8) | b
+
 
 def log(m):
     sys.stdout.write(f'{proc_name}: {m}\n')
@@ -79,6 +87,8 @@ def solid(strip, color):
 #
 # Effects
 #
+def grbw(g, r, b, w):
+    return (g, r, b, w)
 
 def rgb(r, g, b):
     return (r, g, b)
@@ -165,6 +175,8 @@ class PixelString:
         self.ps.show()
         if self.relay:
             self.relay.off()
+
+
 
 def render_one_frame(strings):
     ftimes.insert(0, time.time())
